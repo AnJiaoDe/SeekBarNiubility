@@ -66,7 +66,7 @@ public class SeekBarSimple extends View {
         setRadius_indicator_normal(typedArray.getDimensionPixelSize(R.styleable.SeekBarSimple_radius_indicator_normal, dpAdapt(5)));
         radius_indicator = radius_indicator_normal;
         setRadius_indicator_touch(typedArray.getDimensionPixelSize(R.styleable.SeekBarSimple_radius_indicator_touch, dpAdapt(7)));
-        radius_bar = typedArray.getDimensionPixelSize(R.styleable.SeekBarSimple_radius_indicator_touch, 0);
+        setRadius_bar(typedArray.getDimensionPixelSize(R.styleable.SeekBarSimple_radius_bar, 0));
         typedArray.recycle();
     }
 
@@ -88,6 +88,10 @@ public class SeekBarSimple extends View {
 
     public void setHeight_bar(int height_bar) {
         this.height_bar = height_bar;
+    }
+
+    public void setRadius_bar(int radius_bar) {
+        this.radius_bar = radius_bar;
     }
 
     public int getProgress() {
