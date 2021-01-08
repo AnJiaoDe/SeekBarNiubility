@@ -159,7 +159,7 @@ public class SeekBarSimple extends View {
 
     protected void draw_up(Canvas canvas) {
 //        //2级缓存进度
-        canvas.drawRoundRect(cx, diff, second_right, sum, radius_bar, radius_bar, paint_second);
+//        canvas.drawRoundRect(cx, diff, second_right, sum, radius_bar, radius_bar, paint_second);
 //        //紧跟indicator的rect
         canvas.drawRoundRect(radius_indicator_touch, diff, cx, sum, radius_bar, radius_bar, paint_one);
         //indicator
