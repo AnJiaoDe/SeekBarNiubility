@@ -139,7 +139,7 @@ public class SeekBarSimple extends View {
         width = getWidth();
         height = getHeight();
         width_bar = width - 2 * radius_indicator_touch;
-        cx = radius_indicator_touch;
+        cx = radius_indicator_normal;
         height_half = height * 1f / 2;
         height_rect_half = height_bar * 1f / 2;
         sum = height_half + height_rect_half;
