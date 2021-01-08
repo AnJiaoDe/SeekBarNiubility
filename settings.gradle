@@ -1,0 +1,3 @@
+rootProject.name='SeekBarNiubility'
+include ':app'
+include ':seekbarniubility'
