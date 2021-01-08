@@ -101,6 +101,7 @@ public class SeekBarSimple extends View {
     public void setProgress(int progress) {
         this.progress = Math.max(0, Math.min(PROGRESS_MAX, progress));
         cx = progress * 1f / PROGRESS_MAX * width_bar;
+        LogUtils.log("width_bar",width_bar);
         invalidate();
         if (onSeekBarChangeListener != null)
             onSeekBarChangeListener.onProgressChanged(this, progress);

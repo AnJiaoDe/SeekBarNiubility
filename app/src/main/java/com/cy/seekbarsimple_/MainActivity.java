@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         final SeekBarSimple cySeekBar = findViewById(R.id.cySeekBar);
+        cySeekBar.setProgress(100);
         final SeekBarCache cacheSeekBar = findViewById(R.id.cacheSeekBar);
 
 //        cacheSeekBar.addCacheRecord(1024, 10, 300)
@@ -42,5 +43,6 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
     }
 }

@@ -37,7 +37,8 @@
     <com.cy.seekbarniubility.SeekBarSimple
         android:id="@+id/cySeekBar"
         android:layout_width="match_parent"
-        app:radius_bar="2dp"
+        app:radius_bar="1dp"
+        app:radius_indicator_normal="4dp"
         android:layout_height="wrap_content"
         android:layout_margin="20dp" />
 </LinearLayout>
