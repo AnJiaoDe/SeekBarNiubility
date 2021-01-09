@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+import com.cy.seekbarniubility.LogUtils;
 import com.cy.seekbarniubility.SeekBarSimple;
 
 public class MainActivity extends AppCompatActivity {
@@ -39,6 +40,23 @@ public class MainActivity extends AppCompatActivity {
 //                cacheSeekBar.setProgress(40);
 //                cacheSeekBar.setProgress_second(60);
 
+            }
+        });
+
+        cySeekBar.setOnSeekBarChangeListener(new SeekBarSimple.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBarSimple seekBarSimple, int progress) {
+
+            }
+
+            @Override
+            public void onStartTouch(SeekBarSimple seekBarSimple) {
+
+            }
+
+            @Override
+            public void onStopTouch(SeekBarSimple seekBarSimple) {
+                LogUtils.log("seekBarSimple.getProgress(",seekBarSimple.getProgress());
             }
         });
 

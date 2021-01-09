@@ -197,12 +197,12 @@ public class SeekBarSimple extends View {
 
     private void invalidate_byTouch(MotionEvent event) {
         cx = event.getX();
+        progress =Math.max (0,Math.min((int) (cx * PROGRESS_MAX * 1f / width),PROGRESS_MAX));
         if (cx < radius_indicator_touch) {
             cx = radius_indicator_touch;
         } else if (cx > width - radius_indicator_touch) {
             cx = width - radius_indicator_touch;
         }
-        progress = (int) ((cx - radius_indicator_touch) * PROGRESS_MAX * 1f / width);
         byTouch = true;
         invalidate();
     }
@@ -224,6 +224,12 @@ public class SeekBarSimple extends View {
 
     public void setOnSeekBarChangeListener(OnSeekBarChangeListener onSeekBarChangeListener) {
         this.onSeekBarChangeListener = onSeekBarChangeListener;
+    }
+
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        onSeekBarChangeListener=null;
     }
 
     public static interface OnSeekBarChangeListener {
