@@ -15,11 +15,11 @@
         android:layout_height="wrap_content"
         android:text="改变进度" />
 
-    <com.cy.seekbarniubility.SeekBarCache
-        android:id="@+id/cacheSeekBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp" />
+<!--    <com.cy.seekbarniubility.SeekBarCache-->
+<!--        android:id="@+id/cacheSeekBar"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_margin="20dp" />-->
 
 
     <com.cy.seekbarniubility.SeekBarSimple

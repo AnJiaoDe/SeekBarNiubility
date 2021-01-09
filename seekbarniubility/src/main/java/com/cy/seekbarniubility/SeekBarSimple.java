@@ -41,6 +41,7 @@ public class SeekBarSimple extends View {
     protected float sum;
     protected float diff;
     protected OnSeekBarChangeListener onSeekBarChangeListener;
+    protected boolean byTouch = false;
 //    protected boolean isTracking = false;
 
     public SeekBarSimple(Context context, @Nullable AttributeSet attrs) {
@@ -100,8 +101,6 @@ public class SeekBarSimple extends View {
 
     public void setProgress(int progress) {
         this.progress = Math.max(0, Math.min(PROGRESS_MAX, progress));
-        cx = progress * 1f / PROGRESS_MAX * width_bar;
-        LogUtils.log("width_bar",width_bar);
         invalidate();
         if (onSeekBarChangeListener != null)
             onSeekBarChangeListener.onProgressChanged(this, progress);
@@ -140,7 +139,6 @@ public class SeekBarSimple extends View {
         width = getWidth();
         height = getHeight();
         width_bar = width - 2 * radius_indicator_touch;
-        cx = radius_indicator_normal;
         height_half = height * 1f / 2;
         height_rect_half = height_bar * 1f / 2;
         sum = height_half + height_rect_half;
@@ -150,12 +148,14 @@ public class SeekBarSimple extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+        if (!byTouch) cx = progress * 1f / PROGRESS_MAX * width_bar + radius_indicator_touch;
 //        //清空上次绘制的内容
 //        canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
         //最底层的rect
         canvas.drawRoundRect(radius_indicator_touch, diff, width - radius_indicator_touch, sum,
                 radius_bar, radius_bar, paint_bar);
         draw_others(canvas);
+        byTouch=false;
     }
 
     protected void draw_others(Canvas canvas) {
@@ -182,20 +182,20 @@ public class SeekBarSimple extends View {
                 break;
             case MotionEvent.ACTION_MOVE:
                 radius_indicator = radius_indicator_touch;
-                invalidate_m(event);
+                invalidate_byTouch(event);
                 if (onSeekBarChangeListener != null)
                     onSeekBarChangeListener.onProgressChanged(this, progress);
                 break;
             case MotionEvent.ACTION_UP:
                 radius_indicator = radius_indicator_normal;
-                invalidate_m(event);
+                invalidate_byTouch(event);
                 if (onSeekBarChangeListener != null) onSeekBarChangeListener.onStopTouch(this);
                 break;
         }
         return true;
     }
 
-    private void invalidate_m(MotionEvent event) {
+    private void invalidate_byTouch(MotionEvent event) {
         cx = event.getX();
         if (cx < radius_indicator_touch) {
             cx = radius_indicator_touch;
@@ -203,6 +203,7 @@ public class SeekBarSimple extends View {
             cx = width - radius_indicator_touch;
         }
         progress = (int) ((cx - radius_indicator_touch) * PROGRESS_MAX * 1f / width);
+        byTouch = true;
         invalidate();
     }
 
