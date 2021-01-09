@@ -64,9 +64,9 @@ public class SeekBarSimple extends View {
         setColor_indicator(typedArray.getColor(R.styleable.SeekBarSimple_color_indicator, 0xffffffff));
 
         setHeight_bar(typedArray.getDimensionPixelSize(R.styleable.SeekBarSimple_height_bar, dpAdapt(3)));
-        setRadius_indicator_normal(typedArray.getDimensionPixelSize(R.styleable.SeekBarSimple_radius_indicator_normal, dpAdapt(5)));
+        setRadius_indicator_normal(typedArray.getDimensionPixelSize(R.styleable.SeekBarSimple_radius_indicator_normal, dpAdapt(4)));
         radius_indicator = radius_indicator_normal;
-        setRadius_indicator_touch(typedArray.getDimensionPixelSize(R.styleable.SeekBarSimple_radius_indicator_touch, dpAdapt(7)));
+        setRadius_indicator_touch(typedArray.getDimensionPixelSize(R.styleable.SeekBarSimple_radius_indicator_touch, dpAdapt(8)));
         setRadius_bar(typedArray.getDimensionPixelSize(R.styleable.SeekBarSimple_radius_bar, 0));
         typedArray.recycle();
     }
@@ -148,6 +148,7 @@ public class SeekBarSimple extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+        radius_indicator_normal=Math.min(radius_indicator_normal,radius_indicator_touch);
         if (!byTouch) cx = progress * 1f / PROGRESS_MAX * width_bar + radius_indicator_touch;
 //        //清空上次绘制的内容
 //        canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
