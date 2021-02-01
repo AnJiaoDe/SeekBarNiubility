@@ -179,7 +179,7 @@ public class SeekBarSimple extends View {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 x_down = event.getX();
-                if (onSeekBarChangeListener != null) onSeekBarChangeListener.onStartTouch(this);
+                if (onSeekBarChangeListener != null) onSeekBarChangeListener.onStartTouch(this,progress);
                 break;
             case MotionEvent.ACTION_MOVE:
                 radius_indicator = radius_indicator_touch;
@@ -190,7 +190,7 @@ public class SeekBarSimple extends View {
             case MotionEvent.ACTION_UP:
                 radius_indicator = radius_indicator_normal;
                 invalidate_byTouch(event);
-                if (onSeekBarChangeListener != null) onSeekBarChangeListener.onStopTouch(this);
+                if (onSeekBarChangeListener != null) onSeekBarChangeListener.onStopTouch(this,progress);
                 break;
         }
         return true;
@@ -237,9 +237,9 @@ public class SeekBarSimple extends View {
 
         void onProgressChanged(SeekBarSimple seekBarSimple, int progress);
 
-        void onStartTouch(SeekBarSimple seekBarSimple);
+        void onStartTouch(SeekBarSimple seekBarSimple, int progress);
 
-        void onStopTouch(SeekBarSimple seekBarSimple);
+        void onStopTouch(SeekBarSimple seekBarSimple, int progress);
     }
 
 }

@@ -50,12 +50,12 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onStartTouch(SeekBarSimple seekBarSimple) {
+            public void onStartTouch(SeekBarSimple seekBarSimple, int progress) {
 
             }
 
             @Override
-            public void onStopTouch(SeekBarSimple seekBarSimple) {
+            public void onStopTouch(SeekBarSimple seekBarSimple, int progress) {
                 LogUtils.log("seekBarSimple.getProgress(",seekBarSimple.getProgress());
             }
         });
