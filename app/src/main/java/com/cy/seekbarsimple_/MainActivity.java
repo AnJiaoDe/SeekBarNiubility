@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-import com.cy.seekbarniubility.LogUtils;
 import com.cy.seekbarniubility.SeekBarSimple;
 
 public class MainActivity extends AppCompatActivity {
@@ -56,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onStopTouch(SeekBarSimple seekBarSimple, int progress) {
-                LogUtils.log("seekBarSimple.getProgress(",seekBarSimple.getProgress());
+//                LogUtils.log("seekBarSimple.getProgress(",seekBarSimple.getProgress());
             }
         });
 
