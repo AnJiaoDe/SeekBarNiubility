@@ -190,7 +190,11 @@ public class SeekBarSimple extends View {
             case MotionEvent.ACTION_UP:
                 radius_indicator = radius_indicator_normal;
                 invalidate_byTouch(event);
-                if (onSeekBarChangeListener != null) onSeekBarChangeListener.onStopTouch(this,progress);
+                if (onSeekBarChangeListener != null){
+                    //因为手指放下到抬起，ACTION_MOVE不一定会执行，所以加上onProgressChanged
+                    onSeekBarChangeListener.onProgressChanged(this, progress);
+                    onSeekBarChangeListener.onStopTouch(this,progress);
+                }
                 break;
         }
         return true;
