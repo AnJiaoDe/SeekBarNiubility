@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
 
+
 import androidx.annotation.Nullable;
 
 import java.util.LinkedHashMap;
@@ -52,10 +53,4 @@ public class SeekBarCache extends SeekBarSimple {
         draw_up(canvas);
     }
 
-    @Override
-    protected void onDetachedFromWindow() {
-        super.onDetachedFromWindow();
-        map_long.clear();
-        map.clear();
-    }
 }

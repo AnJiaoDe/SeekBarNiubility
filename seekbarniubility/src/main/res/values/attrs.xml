@@ -17,6 +17,8 @@
     <attr name="color_one" format="color|reference" />
     <attr name="color_second" format="color|reference" />
     <attr name="color_indicator" format="color|reference" />
+    <attr name="cy_color_start" format="color|reference" />
+    <attr name="cy_color_end" format="color|reference" />
     <!--????????????????????????????????????????????????????????????????????-->
     <declare-styleable name="SeekBarSimple">
         <attr name="height_bar" />
@@ -27,5 +29,14 @@
         <attr name="color_one" />
         <attr name="color_second" />
         <attr name="color_indicator" />
+    </declare-styleable>
+    <declare-styleable name="SeekBarGradient">
+        <attr name="height_bar" />
+        <attr name="radius_bar" />
+        <attr name="radius_indicator_normal" />
+        <attr name="radius_indicator_touch" />
+        <attr name="color_indicator" />
+        <attr name="cy_color_start" />
+        <attr name="cy_color_end" />
     </declare-styleable>
 </resources>

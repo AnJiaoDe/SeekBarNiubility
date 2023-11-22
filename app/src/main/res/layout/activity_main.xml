@@ -31,7 +31,7 @@
         app:color_second="#454545"
         app:height_bar="10dp"
         app:radius_bar="6dp"
-        app:radius_indicator_normal="10dp"
+        app:radius_indicator_normal="30dp"
         app:radius_indicator_touch="20dp" />
 
     <com.cy.seekbarniubility.SeekBarSimple
@@ -41,4 +41,20 @@
         app:radius_indicator_normal="4dp"
         android:layout_height="wrap_content"
         android:layout_margin="20dp" />
+    <com.cy.seekbarniubility.SeekBarGradient
+        android:layout_width="match_parent"
+        app:radius_bar="10dp"
+        app:radius_indicator_normal="10dp"
+        app:radius_indicator_touch="14dp"
+        android:layout_height="wrap_content"
+        app:cy_color_start="#0f0"
+        android:id="@+id/SeekBarGradient"
+        app:cy_color_end="#f00"
+        app:height_bar="10dp"
+        android:layout_margin="20dp" />
+    <Button
+        android:layout_width="match_parent"
+        android:text="修改渐变色"
+        android:id="@+id/btn_change_gradient"
+        android:layout_height="wrap_content"/>
 </LinearLayout>
