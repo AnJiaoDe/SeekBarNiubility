@@ -159,7 +159,6 @@ public class SeekBarGradient extends View {
                 break;
             case MotionEvent.ACTION_MOVE:
                 radius_indicator = radius_indicator_touch;
-                invalidate_byTouch(event);
                 if (invalidate_byTouch(event) && onSeekBarChangeListener != null)
                     onSeekBarChangeListener.onProgressChanged(this, progress);
                 break;

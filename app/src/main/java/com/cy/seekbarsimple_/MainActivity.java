@@ -24,18 +24,18 @@ public class MainActivity extends AppCompatActivity {
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                LogUtils.log("SeekBar onProgressChanged"+fromUser,progress);
+                LogUtils.log("SeekBar onProgressChanged" + fromUser, progress);
             }
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-                LogUtils.log("SeekBar onStartTrackingTouch",seekBar.getProgress());
+                LogUtils.log("SeekBar onStartTrackingTouch", seekBar.getProgress());
 
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                LogUtils.log("SeekBar onStopTrackingTouch",seekBar.getProgress());
+                LogUtils.log("SeekBar onStopTrackingTouch", seekBar.getProgress());
             }
         });
         seekBar.setProgress(60);
@@ -70,22 +70,37 @@ public class MainActivity extends AppCompatActivity {
         cySeekBar.setOnSeekBarChangeListener(new SeekBarSimple.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBarSimple seekBarSimple, int progress) {
-                LogUtils.log("onProgressChanged",progress);
+                LogUtils.log("onProgressChanged", progress);
             }
 
             @Override
             public void onStartTouch(SeekBarSimple seekBarSimple, int progress) {
-                LogUtils.log("onStartTouch",progress);
+                LogUtils.log("onStartTouch", progress);
 
             }
 
             @Override
             public void onStopTouch(SeekBarSimple seekBarSimple, int progress) {
-                LogUtils.log("onStopTouch",progress);
+                LogUtils.log("onStopTouch", progress);
             }
         });
         final SeekBarGradient seekBarGradient = findViewById(R.id.SeekBarGradient);
+        seekBarGradient.setOnSeekBarChangeListener(new SeekBarGradient.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBarGradient SeekBarGradient, int progress) {
+                LogUtils.log("onProgressChanged", progress);
+            }
 
+            @Override
+            public void onStartTouch(SeekBarGradient SeekBarGradient, int progress) {
+                LogUtils.log("onStartTouch", progress);
+            }
+
+            @Override
+            public void onStopTouch(SeekBarGradient SeekBarGradient, int progress) {
+                LogUtils.log("onStopTouch", progress);
+            }
+        });
         findViewById(R.id.btn_change_gradient).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
