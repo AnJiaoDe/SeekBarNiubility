@@ -27,7 +27,6 @@ public class SeekBarGradient extends View {
     protected float cx;
     public static final int PROGRESS_MAX = 100;
     protected int progress = 0;
-    protected int progress_second = 0;
     protected float second_right;
     protected int radius_bar = 0;
     protected float height_half;
@@ -93,20 +92,12 @@ public class SeekBarGradient extends View {
     }
 
     public void setProgress(int progress) {
+        int progress_last = this.progress;
         this.progress = Math.max(0, Math.min(PROGRESS_MAX, progress));
+        if (progress_last == this.progress) return;
         invalidate();
         if (onSeekBarChangeListener != null)
             onSeekBarChangeListener.onProgressChanged(this, progress);
-    }
-
-    public int getProgress_second() {
-        return progress_second;
-    }
-
-    public void setProgress_second(int progress_second) {
-        this.progress = Math.max(0, Math.min(PROGRESS_MAX, progress_second));
-        second_right = progress_second * 1f / PROGRESS_MAX * width_bar;
-        invalidate();
     }
 
     public void setRadius_indicator_normal(int radius_indicator_normal) {
@@ -169,24 +160,24 @@ public class SeekBarGradient extends View {
             case MotionEvent.ACTION_MOVE:
                 radius_indicator = radius_indicator_touch;
                 invalidate_byTouch(event);
-                if (onSeekBarChangeListener != null)
+                if (invalidate_byTouch(event) && onSeekBarChangeListener != null)
                     onSeekBarChangeListener.onProgressChanged(this, progress);
                 break;
             case MotionEvent.ACTION_UP:
                 radius_indicator = radius_indicator_normal;
-                invalidate_byTouch(event);
-                if (onSeekBarChangeListener != null) {
-                    //因为手指放下到抬起，ACTION_MOVE不一定会执行，所以加上onProgressChanged
+                //因为手指放下到抬起，ACTION_MOVE不一定会执行，所以加上onProgressChanged
+                if (invalidate_byTouch(event) && onSeekBarChangeListener != null)
                     onSeekBarChangeListener.onProgressChanged(this, progress);
+                if (onSeekBarChangeListener != null)
                     onSeekBarChangeListener.onStopTouch(this, progress);
-                }
                 break;
         }
         return true;
     }
 
-    private void invalidate_byTouch(MotionEvent event) {
+    private boolean invalidate_byTouch(MotionEvent event) {
         cx = event.getX();
+        int progress_last = progress;
         progress = Math.max(0, Math.min((int) (cx * PROGRESS_MAX * 1f / width), PROGRESS_MAX));
         if (cx < r__) {
             cx = r__;
@@ -195,6 +186,9 @@ public class SeekBarGradient extends View {
         }
         byTouch = true;
         invalidate();
+
+        if (progress_last == progress) return false;
+        return true;
     }
 
     protected int dpAdapt(float dp) {
