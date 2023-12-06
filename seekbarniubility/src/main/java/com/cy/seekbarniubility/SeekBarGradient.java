@@ -97,7 +97,7 @@ public class SeekBarGradient extends View {
         if (progress_last == this.progress) return;
         invalidate();
         if (onSeekBarChangeListener != null)
-            onSeekBarChangeListener.onProgressChanged(this, progress);
+            onSeekBarChangeListener.onProgressChanged(this, this.progress);
     }
 
     public void setRadius_indicator_normal(int radius_indicator_normal) {
@@ -177,12 +177,8 @@ public class SeekBarGradient extends View {
     private boolean invalidate_byTouch(MotionEvent event) {
         cx = event.getX();
         int progress_last = progress;
-        progress = Math.max(0, Math.min((int) (cx * PROGRESS_MAX * 1f / width), PROGRESS_MAX));
-        if (cx < r__) {
-            cx = r__;
-        } else if (cx > width - r__) {
-            cx = width - r__;
-        }
+        progress = Math.max(0, Math.min((int) ((cx - r__ )/ width_bar * PROGRESS_MAX), PROGRESS_MAX));
+        cx=Math.min(width - r__,Math.max(cx,r__));
         byTouch = true;
         invalidate();
 

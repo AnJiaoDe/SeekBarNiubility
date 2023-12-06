@@ -8,21 +8,23 @@
     android:background="#000"
     android:gravity="center_horizontal"
     android:orientation="vertical">
-<SeekBar
-    android:layout_width="match_parent"
-    android:id="@+id/SeekBar"
-    android:layout_height="wrap_content"/>
+
+    <SeekBar
+        android:id="@+id/SeekBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <Button
         android:id="@+id/btn_seekbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="改变进度" />
 
-<!--    <com.cy.seekbarniubility.SeekBarCache-->
-<!--        android:id="@+id/cacheSeekBar"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_margin="20dp" />-->
+    <!--    <com.cy.seekbarniubility.SeekBarCache-->
+    <!--        android:id="@+id/cacheSeekBar"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_margin="20dp" />-->
 
 
     <com.cy.seekbarniubility.SeekBarSimple
@@ -37,27 +39,65 @@
         app:radius_indicator_normal="30dp"
         app:radius_indicator_touch="20dp" />
 
-    <com.cy.seekbarniubility.SeekBarSimple
-        android:id="@+id/cySeekBar"
+    <LinearLayout
         android:layout_width="match_parent"
-        app:radius_bar="1dp"
-        app:radius_indicator_normal="4dp"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp" />
-    <com.cy.seekbarniubility.SeekBarGradient
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <com.cy.seekbarniubility.SeekBarSimple
+            android:id="@+id/cySeekBar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:layout_weight="1"
+            app:radius_bar="1dp"
+            app:radius_indicator_normal="4dp" />
+
+        <TextView
+            android:id="@+id/tv_progress"
+            android:layout_width="40dp"
+            android:textColor="#fff"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <com.cy.seekbarniubility.SeekBarSimple
+            android:id="@+id/cySeekBar2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:layout_weight="1"
+            app:radius_bar="1dp"
+            app:radius_indicator_normal="4dp" />
+
+        <TextView
+            android:id="@+id/tv_progress2"
+            android:layout_width="40dp"
+            android:textColor="#fff"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+
+    <com.cy.seekbarniubility.SeekBarGradient
+        android:id="@+id/SeekBarGradient"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        app:cy_color_end="#f00"
+        app:cy_color_start="#0f0"
+        app:height_bar="10dp"
         app:radius_bar="10dp"
         app:radius_indicator_normal="10dp"
-        app:radius_indicator_touch="14dp"
-        android:layout_height="wrap_content"
-        app:cy_color_start="#0f0"
-        android:id="@+id/SeekBarGradient"
-        app:cy_color_end="#f00"
-        app:height_bar="10dp"
-        android:layout_margin="20dp" />
+        app:radius_indicator_touch="14dp" />
+
     <Button
-        android:layout_width="match_parent"
-        android:text="修改渐变色"
         android:id="@+id/btn_change_gradient"
-        android:layout_height="wrap_content"/>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="修改渐变色" />
 </LinearLayout>

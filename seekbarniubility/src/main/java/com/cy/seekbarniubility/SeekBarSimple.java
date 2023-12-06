@@ -106,7 +106,7 @@ public class SeekBarSimple extends View {
         if (progress_last == this.progress) return;
         invalidate();
         if (onSeekBarChangeListener != null)
-            onSeekBarChangeListener.onProgressChanged(this, progress);
+            onSeekBarChangeListener.onProgressChanged(this, this.progress);
     }
 
     public int getProgress_second() {
@@ -143,7 +143,7 @@ public class SeekBarSimple extends View {
         super.onLayout(changed, left, top, right, bottom);
         width = getWidth();
         height = getHeight();
-        width_bar = width - 2 * radius_indicator_touch;
+        width_bar = width - 2 * Math.max(radius_indicator_normal, radius_indicator_touch);
         height_half = height * 1f / 2;
         height_rect_half = height_bar * 1f / 2;
         sum = height_half + height_rect_half;
@@ -169,7 +169,7 @@ public class SeekBarSimple extends View {
 //        //2级缓存进度
 //        canvas.drawRoundRect(cx, diff, second_right, sum, radius_bar, radius_bar, paint_second);
 //        //紧跟indicator的rect
-        canvas.drawRoundRect(radius_indicator_touch, diff, cx, sum, radius_bar, radius_bar, paint_one);
+        canvas.drawRoundRect(r__, diff, cx, sum, radius_bar, radius_bar, paint_one);
         //indicator
         canvas.drawCircle(cx, height_half, radius_indicator, paint_indicator);
     }
@@ -204,12 +204,8 @@ public class SeekBarSimple extends View {
     private boolean invalidate_byTouch(MotionEvent event) {
         cx = event.getX();
         int progress_last = progress;
-        progress = Math.max(0, Math.min((int) (cx * PROGRESS_MAX * 1f / width), PROGRESS_MAX));
-        if (cx < r__) {
-            cx = r__;
-        } else if (cx > width - r__) {
-            cx = width - r__;
-        }
+        progress = Math.max(0, Math.min((int) ((cx - r__ )/ width_bar * PROGRESS_MAX), PROGRESS_MAX));
+        cx=Math.min(width - r__,Math.max(cx,r__));
         byTouch = true;
         invalidate();
 
