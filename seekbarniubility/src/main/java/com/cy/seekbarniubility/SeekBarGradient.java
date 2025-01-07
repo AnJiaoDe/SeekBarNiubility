@@ -97,7 +97,7 @@ public class SeekBarGradient extends View {
         if (progress_last == this.progress) return;
         invalidate();
         if (onSeekBarChangeListener != null)
-            onSeekBarChangeListener.onProgressChanged(this, this.progress);
+            onSeekBarChangeListener.onProgressChanged(this, this.progress,false);
     }
 
     public void setRadius_indicator_normal(int radius_indicator_normal) {
@@ -160,13 +160,13 @@ public class SeekBarGradient extends View {
             case MotionEvent.ACTION_MOVE:
                 radius_indicator = radius_indicator_touch;
                 if (invalidate_byTouch(event) && onSeekBarChangeListener != null)
-                    onSeekBarChangeListener.onProgressChanged(this, progress);
+                    onSeekBarChangeListener.onProgressChanged(this, progress,false);
                 break;
             case MotionEvent.ACTION_UP:
                 radius_indicator = radius_indicator_normal;
                 //因为手指放下到抬起，ACTION_MOVE不一定会执行，所以加上onProgressChanged
                 if (invalidate_byTouch(event) && onSeekBarChangeListener != null)
-                    onSeekBarChangeListener.onProgressChanged(this, progress);
+                    onSeekBarChangeListener.onProgressChanged(this, progress,true);
                 if (onSeekBarChangeListener != null)
                     onSeekBarChangeListener.onStopTouch(this, progress);
                 break;
@@ -177,8 +177,8 @@ public class SeekBarGradient extends View {
     private boolean invalidate_byTouch(MotionEvent event) {
         cx = event.getX();
         int progress_last = progress;
-        progress = Math.max(0, Math.min((int) ((cx - r__ )/ width_bar * PROGRESS_MAX), PROGRESS_MAX));
-        cx=Math.min(width - r__,Math.max(cx,r__));
+        progress = Math.max(0, Math.min((int) ((cx - r__) / width_bar * PROGRESS_MAX), PROGRESS_MAX));
+        cx = Math.min(width - r__, Math.max(cx, r__));
         byTouch = true;
         invalidate();
 
@@ -206,13 +206,14 @@ public class SeekBarGradient extends View {
     }
 
 
-    public static interface OnSeekBarChangeListener {
+    public static abstract class OnSeekBarChangeListener {
+        public abstract void onProgressChanged(SeekBarGradient SeekBarGradient, int progress, boolean touchStop);
 
-        void onProgressChanged(SeekBarGradient SeekBarGradient, int progress);
+        public void onStartTouch(SeekBarGradient SeekBarGradient, int progress) {
+        }
 
-        void onStartTouch(SeekBarGradient SeekBarGradient, int progress);
-
-        void onStopTouch(SeekBarGradient SeekBarGradient, int progress);
+        public void onStopTouch(SeekBarGradient SeekBarGradient, int progress) {
+        }
     }
 
 }
