@@ -97,7 +97,7 @@ public class SeekBarGradient extends View {
         if (progress_last == this.progress) return;
         invalidate();
         if (onSeekBarChangeListener != null)
-            onSeekBarChangeListener.onProgressChanged(this, this.progress,false);
+            onSeekBarChangeListener.onProgressChanged(this, this.progress);
     }
 
     public void setRadius_indicator_normal(int radius_indicator_normal) {
@@ -160,13 +160,13 @@ public class SeekBarGradient extends View {
             case MotionEvent.ACTION_MOVE:
                 radius_indicator = radius_indicator_touch;
                 if (invalidate_byTouch(event) && onSeekBarChangeListener != null)
-                    onSeekBarChangeListener.onProgressChanged(this, progress,false);
+                    onSeekBarChangeListener.onProgressChanged(this, progress);
                 break;
             case MotionEvent.ACTION_UP:
                 radius_indicator = radius_indicator_normal;
                 //因为手指放下到抬起，ACTION_MOVE不一定会执行，所以加上onProgressChanged
                 if (invalidate_byTouch(event) && onSeekBarChangeListener != null)
-                    onSeekBarChangeListener.onProgressChanged(this, progress,true);
+                    onSeekBarChangeListener.onProgressChanged(this, progress);
                 if (onSeekBarChangeListener != null)
                     onSeekBarChangeListener.onStopTouch(this, progress);
                 break;
@@ -207,7 +207,7 @@ public class SeekBarGradient extends View {
 
 
     public static abstract class OnSeekBarChangeListener {
-        public abstract void onProgressChanged(SeekBarGradient SeekBarGradient, int progress, boolean touchStop);
+        public abstract void onProgressChanged(SeekBarGradient SeekBarGradient, int progress);
 
         public void onStartTouch(SeekBarGradient SeekBarGradient, int progress) {
         }

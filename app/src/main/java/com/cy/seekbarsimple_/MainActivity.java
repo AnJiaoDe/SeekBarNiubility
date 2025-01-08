@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
         final TextView tv_progress2=findViewById(R.id.tv_progress2);
         cySeekBar.setOnSeekBarChangeListener(new SeekBarSimple.OnSeekBarChangeListener() {
             @Override
-            public void onProgressChanged(SeekBarSimple seekBarSimple, int progress, boolean touchStop) {
+            public void onProgressChanged(SeekBarSimple seekBarSimple, int progress) {
                 LogUtils.log("onProgressChanged", progress);
                 tv_progress.setText(String.valueOf(progress));
             }
@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
         cySeekBar.setProgress(10);
         cySeekBar2.setOnSeekBarChangeListener(new SeekBarSimple.OnSeekBarChangeListener() {
             @Override
-            public void onProgressChanged(SeekBarSimple seekBarSimple, int progress, boolean touchStop) {
+            public void onProgressChanged(SeekBarSimple seekBarSimple, int progress) {
                 LogUtils.log("onProgressChanged", progress);
                 tv_progress2.setText(String.valueOf(progress));
             }
@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
         final SeekBarGradient seekBarGradient = findViewById(R.id.SeekBarGradient);
         seekBarGradient.setOnSeekBarChangeListener(new SeekBarGradient.OnSeekBarChangeListener() {
             @Override
-            public void onProgressChanged(SeekBarGradient SeekBarGradient, int progress, boolean touchStop) {
+            public void onProgressChanged(SeekBarGradient SeekBarGradient, int progress) {
                 LogUtils.log("onProgressChanged", progress);
             }
             @Override
