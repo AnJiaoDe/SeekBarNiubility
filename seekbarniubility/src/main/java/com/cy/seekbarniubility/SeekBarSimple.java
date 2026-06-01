@@ -106,7 +106,7 @@ public class SeekBarSimple extends View {
         if (progress_last == this.progress) return;
         invalidate();
         if (onSeekBarChangeListener != null)
-            onSeekBarChangeListener.onProgressChanged(this, this.progress);
+            onSeekBarChangeListener.onProgressChanged(this, this.progress,false);
     }
 
     public int getProgress_second() {
@@ -187,13 +187,13 @@ public class SeekBarSimple extends View {
             case MotionEvent.ACTION_MOVE:
                 radius_indicator = radius_indicator_touch;
                 if (invalidate_byTouch(event) && onSeekBarChangeListener != null)
-                    onSeekBarChangeListener.onProgressChanged(this, progress);
+                    onSeekBarChangeListener.onProgressChanged(this, progress,true);
                 break;
             case MotionEvent.ACTION_UP:
                 radius_indicator = radius_indicator_normal;
                 //因为手指放下到抬起，ACTION_MOVE不一定会执行，所以加上onProgressChanged
                 if (invalidate_byTouch(event) && onSeekBarChangeListener != null)
-                    onSeekBarChangeListener.onProgressChanged(this, progress);
+                    onSeekBarChangeListener.onProgressChanged(this, progress,true);
                 if (onSeekBarChangeListener != null)
                     onSeekBarChangeListener.onStopTouch(this, progress);
                 break;
@@ -235,7 +235,7 @@ public class SeekBarSimple extends View {
 
     public static abstract class OnSeekBarChangeListener {
 
-        public abstract void onProgressChanged(SeekBarSimple seekBarSimple, int progress);
+        public abstract void onProgressChanged(SeekBarSimple seekBarSimple, int progress, boolean fromUser);
 
         public void onStartTouch(SeekBarSimple seekBarSimple, int progress) {
         }
