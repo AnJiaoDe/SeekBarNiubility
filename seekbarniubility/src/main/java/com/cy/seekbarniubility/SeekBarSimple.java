@@ -42,7 +42,7 @@ public class SeekBarSimple extends View {
     protected float diff;
     protected OnSeekBarChangeListener onSeekBarChangeListener;
     protected boolean byTouch = false;
-    //    protected boolean isTracking = false;
+    protected boolean isTracking = false;
     protected int r__;
 
     public SeekBarSimple(Context context, @Nullable AttributeSet attrs) {
@@ -101,12 +101,13 @@ public class SeekBarSimple extends View {
     }
 
     public void setProgress(int progress) {
+        if (isTracking) return;
         int progress_last = this.progress;
         this.progress = Math.max(0, Math.min(PROGRESS_MAX, progress));
         if (progress_last == this.progress) return;
         invalidate();
         if (onSeekBarChangeListener != null)
-            onSeekBarChangeListener.onProgressChanged(this, this.progress,false);
+            onSeekBarChangeListener.onProgressChanged(this, this.progress, false);
     }
 
     public int getProgress_second() {
@@ -180,6 +181,7 @@ public class SeekBarSimple extends View {
         if (parent != null) parent.requestDisallowInterceptTouchEvent(true);
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
+                isTracking = true;
                 x_down = event.getX();
                 if (onSeekBarChangeListener != null)
                     onSeekBarChangeListener.onStartTouch(this, progress);
@@ -187,15 +189,26 @@ public class SeekBarSimple extends View {
             case MotionEvent.ACTION_MOVE:
                 radius_indicator = radius_indicator_touch;
                 if (invalidate_byTouch(event) && onSeekBarChangeListener != null)
-                    onSeekBarChangeListener.onProgressChanged(this, progress,true);
+                    onSeekBarChangeListener.onProgressChanged(this, progress, true);
                 break;
             case MotionEvent.ACTION_UP:
                 radius_indicator = radius_indicator_normal;
                 //因为手指放下到抬起，ACTION_MOVE不一定会执行，所以加上onProgressChanged
                 if (invalidate_byTouch(event) && onSeekBarChangeListener != null)
-                    onSeekBarChangeListener.onProgressChanged(this, progress,true);
+                    onSeekBarChangeListener.onProgressChanged(this, progress, true);
                 if (onSeekBarChangeListener != null)
                     onSeekBarChangeListener.onStopTouch(this, progress);
+                //必须写最后
+                isTracking=false;
+                break;
+            case MotionEvent.ACTION_CANCEL:
+                radius_indicator = radius_indicator_normal;
+                isTracking = false;
+                byTouch = false;
+                invalidate();
+                if (onSeekBarChangeListener != null) {
+                    onSeekBarChangeListener.onStopTouch(this, progress);
+                }
                 break;
         }
         return true;
